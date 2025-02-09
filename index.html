@@ -110,7 +110,7 @@
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script type="module">
         (function () {
-            // emailjs.init("ugM5eCvEzbHsSc9i1"); // Wklej swój User ID
+            emailjs.init("ugM5eCvEzbHsSc9i1"); // Wklej swój User ID
         })();
 
         import confetti from 'https://cdn.skypack.dev/canvas-confetti';
@@ -162,17 +162,17 @@
             confetti(); // Uruchom animację konfetti
 
             // Wysyłanie e-maila przez EmailJS
-            // emailjs.send("service_9cmehno", "template_842xlyp", {
-            //     to_email: "pk0ch@wp.pl", // Podaj swój e-mail
-            //     message: "Tak! ❤️" + "\n" + "po " + noClickCount + " próbach" // Wiadomość
-            // }).then(
-            //     function (response) {
-            //         console.log("Email wysłany!", response.status, response.text);
-            //     },
-            //     function (error) {
-            //         console.log("Błąd przy wysyłaniu emaila", error);
-            //     }
-            // );
+            emailjs.send("service_9cmehno", "template_842xlyp", {
+                to_email: "pk0ch@wp.pl", // Podaj swój e-mail
+                message: "Tak! ❤️" + "\n" + "po " + noClickCount + " próbach" // Wiadomość
+            }).then(
+                function (response) {
+                    console.log("Email wysłany!", response.status, response.text);
+                },
+                function (error) {
+                    console.log("Błąd przy wysyłaniu emaila", error);
+                }
+            );
 
             setTimeout(() => {
                 document.body.classList.add('fade-out')
