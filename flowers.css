@@ -21,10 +21,12 @@ body {
 	display: flex;
 	align-items: flex-end;
 	justify-content: center;
-	height: 100vh;
+	height: 100svh;
 	padding: 4em;
 	background-color: var(--background-color);
 	overflow: hidden;
+	font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+		'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 .gradient-background {
@@ -84,9 +86,9 @@ h1 {
 }
 
 @media (max-width: 600px) {
-	h1 {
-		font-size: 2em;
+	.line-1 {
 		width: 90%;
+		top: 15%;
 	}
 }
 
