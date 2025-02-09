@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentines Day</title>
+    <title>Walentynki</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .gradient-background {
@@ -54,18 +54,18 @@
 <body class="gradient-background">
     <div class="flex items-center justify-center h-screen">
         <div class="flex flex-col items-center p-4">
-            <img id="imageDisplay" src="./images/image1.gif" alt="Cute kitten with flowers" class="rounded-md h-[300px]"
+            <img id="imageDisplay" src="./images/image1.gif" alt="Słodki kotek z kwiatami" class="rounded-md h-[300px]"
                 style="object-fit: cover;" />
             <h2 id="valentineQuestion" class="text-4xl font-bold italic text-[#bd1e59] my-4">Zostaniesz moją walentynką?
             </h2>
             <div class="flex gap-4 pt-[20px] items-center" id="responseButtons">
                 <button id="yesButton"
                     class="bounce2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-[20px] font-medium disabled:pointer-events-none disabled:opacity-50 hover:bg-green-400 min-h-12 min-w-[75px] px-4 py-2 bg-green-500 text-white transition">
-                    Yes
+                    TAK
                 </button>
                 <button id="noButton"
                     class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-[20px] font-medium transition disabled:pointer-events-none disabled:opacity-50 hover:bg-red-700 h-12 min-w-[75px] w-auto px-4 py-2 bg-red-500 text-white">
-                    No
+                    NIE
                 </button>
             </div>
         </div>
@@ -85,9 +85,9 @@
         const responseButtons = document.getElementById('responseButtons');
 
         let noClickCount = 0;
-        let buttonHeight = 48; // Starting height in pixels
+        let buttonHeight = 48; // Początkowa wysokość w pikselach
         let buttonWidth = 80;
-        let fontSize = 20; // Starting font size in pixels
+        let fontSize = 20; // Początkowy rozmiar czcionki w pikselach
         const imagePaths = [
             "./images/image1.gif",
             "./images/image2.gif",
@@ -102,12 +102,12 @@
             if (noClickCount < 5) {
                 noClickCount++;
                 imageDisplay.src = imagePaths[noClickCount];
-                buttonHeight += 35; // Increase height by 5px on each click
+                buttonHeight += 35; // Zwiększ wysokość o 5px przy każdym kliknięciu
                 buttonWidth += 35;
-                fontSize += 25; // Increase font size by 1px on each click
-                yesButton.style.height = `${buttonHeight}px`; // Update button height
+                fontSize += 25; // Zwiększ rozmiar czcionki o 1px przy każdym kliknięciu
+                yesButton.style.height = `${buttonHeight}px`; // Zaktualizuj wysokość przycisku
                 yesButton.style.width = `${buttonWidth}px`;
-                yesButton.style.fontSize = `${fontSize}px`; // Update font size
+                yesButton.style.fontSize = `${fontSize}px`; // Zaktualizuj rozmiar czcionki
                 if (noClickCount < 6) {
                     noButton.textContent = ["Nie", "Jesteś pewna?", "Przemyśl to...", "Nie rób mi tego :(", "Łamiesz mi serce 💔", "Idę płakać...😢"][noClickCount];
                 }
@@ -115,11 +115,11 @@
         });
 
         yesButton.addEventListener('click', () => {
-            imageDisplay.src = './images/image7.gif'; // Change to image7.gif
-            valentineQuestion.textContent = "Yayyy!! :3"; // Change the question text
-            responseButtons.style.display = 'none'; // Hide both buttons
+            imageDisplay.src = './images/image7.gif'; // Zmień na image7.gif
+            valentineQuestion.textContent = "Yayyy!! :3"; // Zmień tekst pytania
+            responseButtons.style.display = 'none'; // Ukryj oba przyciski
 
-            confetti(); // Trigger confetti animation
+            confetti(); // Uruchom animację konfetti
 
             // Wysyłanie e-maila przez EmailJS
             emailjs.send("service_9cmehno", "template_842xlyp", {
@@ -132,13 +132,12 @@
                 function (error) {
                     console.log("Błąd przy wysyłaniu emaila", error);
                 }
-            );
-            ;
+            ).catch();
 
             setTimeout(() => {
                 document.body.classList.add('fade-out')
-                window.location.replace("flowers.html"); // Redirect to example.com after 3 seconds
-            }, 3 * 1000);
+                window.location.replace("flowers.html"); // Przekieruj na flowers.html po 3 sekundach
+            }, 2.5 * 1000);
         });
     </script>
 </body>
