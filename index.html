@@ -4,9 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Walentynki</title>
+    <title>Walentynki 💕😍❤️</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="./images/heart_1.png" type="image/png">
     <style>
+        html,
+        body {
+            overflow: hidden;
+            /* Blokuje przewijanie */
+            max-width: 100vw;
+            max-height: 100vh;
+        }
+
+        #yesButton {
+            max-width: 300px;
+            /* Maksymalna szerokość */
+            max-height: 120px;
+            /* Maksymalna wysokość */
+            font-size: 30px;
+            /* Domyślny rozmiar czcionki */
+            transition: all 0.3s ease-in-out;
+            /* Ładna animacja */
+        }
+
+        @media (max-width: 768px) {
+            #yesButton {
+                max-width: 250px;
+                /* Mniejsza szerokość na telefonach */
+                max-height: 100px;
+                font-size: 24px;
+            }
+
+            #noButton {
+                font-size: 16px;
+                /* Mniejsza czcionka dla długiego tekstu */
+                padding: 8px;
+            }
+        }
+
         .gradient-background {
             background: rgb(255, 208, 229);
             background: linear-gradient(180deg, rgba(255, 208, 229, 1) 0%, rgba(255, 232, 242, 1) 36%, rgba(255, 255, 255, 1) 100%);
@@ -52,11 +87,12 @@
 </head>
 
 <body class="gradient-background">
-    <div class="flex items-center justify-center h-screen">
+    <div class="flex items-center justify-center h-screen p-4 md:p-8">
         <div class="flex flex-col items-center p-4">
             <img id="imageDisplay" src="./images/image1.gif" alt="Słodki kotek z kwiatami" class="rounded-md h-[300px]"
                 style="object-fit: cover;" />
-            <h2 id="valentineQuestion" class="text-4xl font-bold italic text-[#bd1e59] my-4">Zostaniesz moją walentynką?
+            <h2 id="valentineQuestion" class="text-4xl font-bold italic text-[#bd1e59] my-4 mx-4">Zostaniesz moją
+                walentynką?
             </h2>
             <div class="flex gap-4 pt-[20px] items-center" id="responseButtons">
                 <button id="yesButton"
@@ -74,7 +110,7 @@
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script type="module">
         (function () {
-            emailjs.init("ugM5eCvEzbHsSc9i1"); // Wklej swój User ID
+            // emailjs.init("ugM5eCvEzbHsSc9i1"); // Wklej swój User ID
         })();
 
         import confetti from 'https://cdn.skypack.dev/canvas-confetti';
@@ -102,15 +138,19 @@
             if (noClickCount < 5) {
                 noClickCount++;
                 imageDisplay.src = imagePaths[noClickCount];
-                buttonHeight += 35; // Zwiększ wysokość o 5px przy każdym kliknięciu
-                buttonWidth += 35;
-                fontSize += 25; // Zwiększ rozmiar czcionki o 1px przy każdym kliknięciu
-                yesButton.style.height = `${buttonHeight}px`; // Zaktualizuj wysokość przycisku
-                yesButton.style.width = `${buttonWidth}px`;
-                yesButton.style.fontSize = `${fontSize}px`; // Zaktualizuj rozmiar czcionki
-                if (noClickCount < 6) {
-                    noButton.textContent = ["Nie", "Jesteś pewna?", "Przemyśl to...", "Nie rób mi tego :(", "Łamiesz mi serce 💔", "Idę płakać...😢"][noClickCount];
-                }
+
+                // Powiększamy przycisk TAK bardziej agresywnie
+                let newHeight = Math.min(yesButton.offsetHeight + 40, 120);
+                let newWidth = Math.min(yesButton.offsetWidth + 40, 300);
+                let newFontSize = Math.min(parseInt(window.getComputedStyle(yesButton).fontSize) + 10, 40);
+
+                yesButton.style.height = `${newHeight}px`;
+                yesButton.style.width = `${newWidth}px`;
+                yesButton.style.fontSize = `${newFontSize}px`;
+
+                // Zmiana tekstu przycisku NIE
+                let texts = ["Nie", "Jesteś pewna?", "Przemyśl to...", "Nie rób mi tego :(", "Łamiesz mi serce 💔", "Idę płakać...😢"];
+                noButton.textContent = texts[Math.min(noClickCount, texts.length - 1)];
             }
         });
 
@@ -122,17 +162,17 @@
             confetti(); // Uruchom animację konfetti
 
             // Wysyłanie e-maila przez EmailJS
-            emailjs.send("service_9cmehno", "template_842xlyp", {
-                to_email: "pk0ch@wp.pl", // Podaj swój e-mail
-                message: "Tak! ❤️" + "\n" + "po " + noClickCount + " próbach" // Wiadomość
-            }).then(
-                function (response) {
-                    console.log("Email wysłany!", response.status, response.text);
-                },
-                function (error) {
-                    console.log("Błąd przy wysyłaniu emaila", error);
-                }
-            ).catch();
+            // emailjs.send("service_9cmehno", "template_842xlyp", {
+            //     to_email: "pk0ch@wp.pl", // Podaj swój e-mail
+            //     message: "Tak! ❤️" + "\n" + "po " + noClickCount + " próbach" // Wiadomość
+            // }).then(
+            //     function (response) {
+            //         console.log("Email wysłany!", response.status, response.text);
+            //     },
+            //     function (error) {
+            //         console.log("Błąd przy wysyłaniu emaila", error);
+            //     }
+            // );
 
             setTimeout(() => {
                 document.body.classList.add('fade-out')

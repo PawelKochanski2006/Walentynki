@@ -56,7 +56,7 @@ h1 {
 }
 
 .typing-done {
-    border-right: none;
+	border-right: none;
 }
 
 /* Animation */
@@ -430,16 +430,13 @@ h1 {
 	bottom: 0vmin;
 	width: 1vmin;
 	height: 1vmin;
-	/* background-color: #ff0000; */
-	/* border-radius: 50%; */
-	background-image: url(heart_3.png);
+	background-image: url(./images/heart_3.png);
 	background-size: cover;
-	/* filter: blur(0.2vmin); */
 	animation: light-ans 4s linear infinite backwards;
 }
 
 .flower__light:nth-child(odd) {
-	background-image: url(heart_1.png);
+	background-image: url(./images/heart_1.png);
 	background-size: cover;
 }
 .flower__light--1 {
